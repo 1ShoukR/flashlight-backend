@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/1ShoukR/flashlight-backend/internal/models"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
@@ -32,6 +33,7 @@ func NewServer() *http.Server {
 		db:     db,      
 		router: router,
 	}
+	db.AutoMigrate(&models.Student{})
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", newServer.port),
 		Handler:      newServer.router,
