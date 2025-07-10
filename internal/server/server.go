@@ -8,11 +8,12 @@ import (
 	"strconv"
 
 	"github.com/1ShoukR/flashlight-backend/internal/models"
+	"github.com/1ShoukR/flashlight-backend/internal/routes"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"github.com/gin-contrib/cors"
 )
 
 type Server struct {
@@ -40,6 +41,7 @@ func NewServer() *http.Server {
 		db:     db,      
 		router: router,
 	}
+	routes.Students(newServer.router, db)
 	db.AutoMigrate(&models.Student{})
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", newServer.port),
