@@ -7,5 +7,6 @@ import (
 )
 
 func Students(router *gin.Engine, db *gorm.DB) {
-	router.GET("/students/all", handlers.IsThisWorking(db, router))
+	router.GET("/students/all", handlers.GetAllStudents(db, router))
+	router.POST("/students/create", handlers.CreateStudent(db, router))
 }
