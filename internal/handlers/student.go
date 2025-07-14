@@ -17,7 +17,9 @@ type UserData struct {
 func GetAllStudents(db *gorm.DB, router *gin.Engine) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var students []models.Student
-		if err := db.Find(&students); err != nil {
+		
+		result := db.Find(&students)
+		if result.Error != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to fetch students"})
 			return
 		}
