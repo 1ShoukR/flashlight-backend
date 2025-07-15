@@ -33,7 +33,7 @@ func NewServer() *http.Server {
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
 	}
-	
+	// The error and ping might be redundant. Can expand further on the thought.
 	sqlDB, err := db.DB()
 	if err != nil {
 		log.Fatalf("failed to get database instance: %v", err)
